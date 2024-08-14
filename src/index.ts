@@ -85,6 +85,7 @@ async function activate(
   palette: ICommandPalette | null,
   translator: ITranslator | null
 ): Promise<IGitExtension> {
+  console.log('JupyterLab-GIT (for NDP) is activated');
   let settings: ISettingRegistry.ISettings | undefined = undefined;
   let serverSettings: Git.IServerSettings;
   translator = translator ?? nullTranslator;

@@ -48,10 +48,11 @@ export const gitCloneCommandPlugin: JupyterFrontEndPlugin<void> = {
       label: trans.__('Clone a Repository'),
       caption: trans.__('Clone a repository from a URL'),
       isEnabled: () => gitModel.pathRepository === null,
-      execute: async () => {
+      execute: async (args: { url?: string }) => {
+        const repoUrl = args.url || '';
         const result = await showDialog({
           title: trans.__('Clone a repo'),
-          body: new GitCloneForm(trans),
+          body: new GitCloneForm(trans, repoUrl),
           focusNodeSelector: 'input',
           buttons: [
             Dialog.cancelButton({ label: trans.__('Cancel') }),

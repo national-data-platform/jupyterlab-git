@@ -7,10 +7,11 @@ import { Widget } from '@lumino/widgets';
 export class GitCloneForm extends Widget {
   /**
    * Create a redirect form.
-   * @param translator - The language translator
+   * @param trans
+   * @param repoUrl
    */
-  constructor(trans: TranslationBundle) {
-    super({ node: GitCloneForm.createFormNode(trans) });
+  constructor(trans: TranslationBundle, repoUrl?: string) {
+    super({ node: GitCloneForm.createFormNode(trans, repoUrl) });
   }
 
   /**
@@ -36,7 +37,10 @@ export class GitCloneForm extends Widget {
     };
   }
 
-  private static createFormNode(trans: TranslationBundle): HTMLElement {
+  private static createFormNode(
+    trans: TranslationBundle,
+    repoUrl?: string
+  ): HTMLElement {
     const node = document.createElement('div');
     const inputWrapper = document.createElement('div');
     const inputLinkLabel = document.createElement('label');
@@ -61,6 +65,7 @@ export class GitCloneForm extends Widget {
       'Enter the URI of the remote Git repository'
     );
     inputLink.placeholder = 'https://host.com/org/repo.git';
+    inputLink.value = repoUrl || '';
 
     subModulesLabel.textContent = trans.__('Include submodules');
     subModulesLabel.title = trans.__(
